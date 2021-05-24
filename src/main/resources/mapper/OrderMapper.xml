@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qhit.easybuy.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.qhit.easybuy.entity.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="loginName" property="loginname" jdbcType="VARCHAR" />
+    <result column="userAddress" property="useraddress" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="cost" property="cost" jdbcType="REAL" />
+    <result column="serialNumber" property="serialnumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, loginName, userAddress, createTime, cost, serialNumber
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from easybuy_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from easybuy_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qhit.easybuy.entity.Order" useGeneratedKeys="true" keyProperty="id" >
+    insert into easybuy_order (userId, loginName, userAddress, 
+      createTime, cost, serialNumber
+      )
+    values (#{userid,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{useraddress,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{cost,jdbcType=REAL}, #{serialnumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qhit.easybuy.entity.Order" useGeneratedKeys="true" keyProperty="id" >
+    insert into easybuy_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="loginname != null" >
+        loginName,
+      </if>
+      <if test="useraddress != null" >
+        userAddress,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="serialnumber != null" >
+        serialNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddress != null" >
+        #{useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=REAL},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qhit.easybuy.entity.Order" >
+    update easybuy_order
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null" >
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddress != null" >
+        userAddress = #{useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=REAL},
+      </if>
+      <if test="serialnumber != null" >
+        serialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qhit.easybuy.entity.Order" >
+    update easybuy_order
+    set userId = #{userid,jdbcType=INTEGER},
+      loginName = #{loginname,jdbcType=VARCHAR},
+      userAddress = #{useraddress,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      cost = #{cost,jdbcType=REAL},
+      serialNumber = #{serialnumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

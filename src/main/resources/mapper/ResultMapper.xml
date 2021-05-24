@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qhit.easybuy.dao.ResultMapper" >
+  <resultMap id="BaseResultMap" type="com.qhit.easybuy.entity.Result" >
+    <result column="stuno" property="stuno" jdbcType="CHAR" />
+    <result column="subjectName" property="subjectname" jdbcType="CHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.qhit.easybuy.entity.Result" >
+    insert into result (stuno, subjectName, score, 
+      age)
+    values (#{stuno,jdbcType=CHAR}, #{subjectname,jdbcType=CHAR}, #{score,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qhit.easybuy.entity.Result" >
+    insert into result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuno != null" >
+        stuno,
+      </if>
+      <if test="subjectname != null" >
+        subjectName,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuno != null" >
+        #{stuno,jdbcType=CHAR},
+      </if>
+      <if test="subjectname != null" >
+        #{subjectname,jdbcType=CHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
